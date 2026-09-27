@@ -3,10 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-<title>測字閣 · 风水运势测字</title>
+<title>测字阁 · 风水运势测字</title>
 <style>
 :root{
-  --bg:#12100e; --bg2:#1b1815; --ink:#e8dcc3; --ink-dim:#9c8f78;
+  --bg:#12100e; --ink:#e8dcc3; --ink-dim:#9c8f78;
   --gold:#c9a45c; --gold-bright:#e6c87e; --red:#b03a2e; --red-bright:#d45b4a;
   --card:#201c17; --line:#3a332a;
 }
@@ -35,25 +35,18 @@ input[type=range]{accent-color:var(--gold);width:110px}
 .swatch.on{border-color:#fff}
 .btn{font-family:inherit;background:linear-gradient(180deg,#2b251d,#211c15);color:var(--ink);border:1px solid var(--line);border-radius:8px;padding:8px 16px;font-size:15px;cursor:pointer;letter-spacing:2px}
 .btn:hover{border-color:var(--gold);color:var(--gold-bright)}
-.btn.primary{background:linear-gradient(180deg,#8e2f24,#6e2118);border-color:#a03d30;color:#f5e6c8;font-size:17px;padding:11px 30px;letter-spacing:6px}
+.btn.primary{display:block;width:100%;margin-top:16px;background:linear-gradient(180deg,#8e2f24,#6e2118);border-color:#a03d30;color:#f5e6c8;font-size:18px;padding:12px;letter-spacing:10px}
 .btn.primary:hover{filter:brightness(1.15)}
-.write-row{display:flex;gap:10px;align-items:center;margin-top:16px;flex-wrap:wrap}
-.write-row input[type=text]{flex:none;width:76px;background:#14110d;border:1px solid var(--line);border-radius:8px;color:var(--gold-bright);font-family:inherit;font-size:26px;text-align:center;padding:8px}
-.mode-tip{font-size:12.5px;color:#6f6656;margin-top:10px;letter-spacing:1px;line-height:1.8}
-.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
-.chips span{font-size:16px;padding:5px 11px;border:1px solid var(--line);border-radius:20px;cursor:pointer;color:var(--ink-dim)}
-.chips span:hover{border-color:var(--gold);color:var(--gold-bright)}
 #result{display:none;margin-top:8px}
 #result.show{display:block;animation:rise .7s ease both}
 @keyframes rise{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:none}}
 .res-head{display:flex;align-items:center;gap:20px;flex-wrap:wrap}
-.big-char{width:110px;height:110px;flex:none;display:flex;align-items:center;justify-content:center;font-size:76px;background:radial-gradient(circle at 40% 35%,#2c261d,#191510);border:1px solid var(--gold);border-radius:12px;color:var(--gold-bright);box-shadow:0 0 24px rgba(201,164,92,.15) inset;overflow:hidden}
+.big-char{width:110px;height:110px;flex:none;display:flex;align-items:center;justify-content:center;background:radial-gradient(circle at 40% 35%,#2c261d,#191510);border:1px solid var(--gold);border-radius:12px;box-shadow:0 0 24px rgba(201,164,92,.15) inset;overflow:hidden}
 .big-char img{width:100%;height:100%;object-fit:contain;filter:invert(.92) sepia(.4) saturate(3) hue-rotate(-15deg)}
 .seal{width:46px;height:46px;flex:none;background:linear-gradient(160deg,var(--red-bright),#8e2f24);color:#f7e9c9;font-size:22px;display:flex;align-items:center;justify-content:center;border-radius:8px;transform:rotate(-8deg);box-shadow:0 2px 8px rgba(0,0,0,.5);margin-left:auto;animation:stamp .45s cubic-bezier(.2,2.2,.4,1) .3s both}
 @keyframes stamp{from{transform:rotate(-8deg) scale(2.4);opacity:0}to{transform:rotate(-8deg) scale(1);opacity:1}}
 .res-meta{font-size:15px;color:var(--ink-dim);line-height:1.9;flex:1;min-width:200px}
 .res-meta b{color:var(--gold-bright);font-weight:normal}
-.badge{display:inline-block;padding:2px 12px;border-radius:20px;font-size:14px;border:1px solid var(--gold);color:var(--gold-bright);margin-right:8px}
 .score-row{display:flex;align-items:center;gap:14px;margin:16px 0 6px}
 .score-num{font-size:40px;color:var(--gold-bright)}
 .stars{color:var(--gold);font-size:18px;letter-spacing:3px}
@@ -83,40 +76,35 @@ footer{text-align:center;color:#5c5344;font-size:12px;margin-top:34px;letter-spa
 <body>
 <div class="wrap">
   <header>
-    <div class="zi">測</div>
-    <h1>測 字 閣</h1>
-    <p>心誠一筆 · 字裡乾坤</p>
+    <div class="zi">测</div>
+    <h1>测 字 阁</h1>
+    <p>心诚一笔 · 字里乾坤</p>
   </header>
 
-  <div class="divider">壹 · 揮毫</div>
+  <div class="divider">壹 · 挥毫</div>
   <div class="panel">
     <div class="board-wrap">
       <canvas id="board"></canvas>
-      <div class="board-hint" id="hint">書</div>
+      <div class="board-hint" id="hint">书</div>
     </div>
     <div class="tools">
-      <label>筆觸</label><input type="range" id="size" min="3" max="24" value="9">
+      <label>笔触</label><input type="range" id="size" min="3" max="24" value="9">
       <div class="swatch on" data-c="#e8dcc3" style="background:#e8dcc3"></div>
       <div class="swatch" data-c="#d45b4a" style="background:#d45b4a"></div>
       <div class="swatch" data-c="#c9a45c" style="background:#c9a45c"></div>
-      <button class="btn" id="undo">↩ 撤筆</button>
-      <button class="btn" id="clear">✕ 洗硯</button>
+      <button class="btn" id="undo">↩ 撤笔</button>
+      <button class="btn" id="clear">✕ 洗砚</button>
     </div>
-    <div class="write-row">
-      <button class="btn primary" id="go">測 字</button>
-      <input type="text" id="charInput" maxlength="1" placeholder="選填">
-      <div class="chips" id="chips" style="margin-top:0"></div>
-    </div>
-    <div class="mode-tip">在上方盡情書寫，點「測字」即從<b style="color:var(--gold-bright)">筆跡本身</b>推演運勢，不必告知所書何字；<br>若補充告知所書之字，將兼參字義五行，解析更為詳盡。</div>
+    <button class="btn primary" id="go">测 字</button>
   </div>
 
   <div id="result">
-    <div class="divider">貳 · 解字</div>
+    <div class="divider">贰 · 解字</div>
     <div class="panel">
       <div class="res-head">
-        <div class="big-char" id="rChar">書</div>
+        <div class="big-char" id="rChar"></div>
         <div class="res-meta" id="rMeta"></div>
-        <div class="seal">測</div>
+        <div class="seal">测</div>
       </div>
       <div class="score-row">
         <div class="score-num" id="rScore">--</div>
@@ -132,98 +120,16 @@ footer{text-align:center;color:#5c5344;font-size:12px;margin-top:34px;letter-spa
         <div class="ji"><b>忌</b>　<span id="rJi"></span></div>
       </div>
       <div class="lucky" id="rLucky"></div>
-      <button class="btn copy-btn" id="copy">複製籤文</button>
-      <div class="notice">籤文由筆跡形態、五行氣韻與當日運數推演，僅供娛樂，請勿迷信。</div>
+      <button class="btn copy-btn" id="copy">复制签文</button>
+      <div class="notice">签文由笔迹形态、五行气韵与当日运数推演，仅供娱乐，请勿迷信。</div>
     </div>
   </div>
 
-  <footer>測字閣 · 娛樂為主 · 信則有 不信則無</footer>
+  <footer>测字阁 · 娱乐为主 · 信则有 不信则无</footer>
 </div>
 
 <script>
-/* ============ 字庫（選填模式：字義五行） ============ */
-const DIC = {
-福:{s:13,e:"水"},祿:{s:13,e:"火"},壽:{s:14,e:"金"},喜:{s:12,e:"水"},財:{s:10,e:"金"},
-發:{s:12,e:"水"},運:{s:12,e:"土"},吉:{s:6,e:"木"},祥:{s:10,e:"金"},安:{s:6,e:"土"},
-康:{s:11,e:"木"},寧:{s:14,e:"火"},順:{s:12,e:"金"},和:{s:8,e:"水"},平:{s:5,e:"水"},
-靜:{s:16,e:"金"},慧:{s:15,e:"水"},智:{s:12,e:"火"},仁:{s:4,e:"金"},義:{s:13,e:"木"},
-禮:{s:18,e:"火"},信:{s:9,e:"金"},勇:{s:9,e:"土"},毅:{s:15,e:"木"},志:{s:7,e:"火"},
-夢:{s:13,e:"木"},心:{s:4,e:"金"},念:{s:8,e:"火"},思:{s:9,e:"金"},想:{s:13,e:"金"},
-愛:{s:13,e:"土"},情:{s:11,e:"金"},緣:{s:15,e:"土"},姻:{s:9,e:"土"},合:{s:6,e:"水"},
-樂:{s:15,e:"火"},笑:{s:10,e:"金"},歡:{s:22,e:"水"},慶:{s:15,e:"木"},
-龍:{s:16,e:"火"},鳳:{s:14,e:"水"},麟:{s:23,e:"火"},鶴:{s:21,e:"水"},
-山:{s:3,e:"土"},水:{s:4,e:"水"},火:{s:4,e:"火"},木:{s:4,e:"木"},金:{s:8,e:"金"},
-土:{s:3,e:"土"},日:{s:4,e:"火"},月:{s:4,e:"木"},星:{s:9,e:"金"},雲:{s:12,e:"水"},
-風:{s:9,e:"水"},雨:{s:8,e:"水"},雪:{s:11,e:"水"},霜:{s:17,e:"水"},
-天:{s:4,e:"火"},地:{s:6,e:"土"},人:{s:2,e:"金"},生:{s:5,e:"金"},道:{s:12,e:"火"},
-德:{s:15,e:"火"},善:{s:12,e:"金"},美:{s:9,e:"水"},真:{s:10,e:"金"},誠:{s:14,e:"金"},
-家:{s:10,e:"木"},庭:{s:9,e:"火"},富:{s:12,e:"水"},貴:{s:12,e:"木"},寶:{s:20,e:"火"},
-玉:{s:5,e:"木"},珠:{s:10,e:"金"},光:{s:6,e:"火"},明:{s:8,e:"水"},輝:{s:15,e:"水"},
-春:{s:9,e:"金"},夏:{s:10,e:"火"},秋:{s:9,e:"金"},冬:{s:5,e:"火"},花:{s:8,e:"木"},
-開:{s:12,e:"木"},得:{s:11,e:"金"},成:{s:6,e:"金"},功:{s:5,e:"木"},名:{s:6,e:"水"},
-利:{s:7,e:"火"},見:{s:7,e:"木"},聞:{s:14,e:"水"},達:{s:12,e:"火"},昇:{s:8,e:"金"},
-起:{s:10,e:"木"},時:{s:10,e:"金"},來:{s:8,e:"火"},轉:{s:18,e:"火"},變:{s:23,e:"水"},
-通:{s:11,e:"火"},亨:{s:7,e:"水"},元:{s:4,e:"木"},永:{s:5,e:"水"},恆:{s:9,e:"水"},
-昌:{s:8,e:"金"},盛:{s:11,e:"金"},興:{s:16,e:"水"},旺:{s:8,e:"土"},
-錢:{s:16,e:"金"},銀:{s:14,e:"金"},帛:{s:8,e:"水"},
-守:{s:6,e:"金"},護:{s:21,e:"水"},佑:{s:7,e:"土"},助:{s:7,e:"金"},援:{s:12,e:"土"},
-清:{s:11,e:"水"},淨:{s:11,e:"水"},澄:{s:16,e:"水"},澈:{s:15,e:"水"},溪:{s:14,e:"水"},
-松:{s:8,e:"木"},柏:{s:9,e:"木"},竹:{s:6,e:"木"},梅:{s:11,e:"木"},蘭:{s:23,e:"木"},
-鴻:{s:17,e:"水"},鵬:{s:19,e:"水"},鷹:{s:24,e:"木"},馬:{s:10,e:"水"},駿:{s:17,e:"金"},
-魚:{s:11,e:"水"},麒:{s:19,e:"木"},
-一:{s:1,e:"土"},二:{s:2,e:"火"},三:{s:3,e:"金"},四:{s:5,e:"金"},五:{s:4,e:"土"},
-六:{s:4,e:"火"},七:{s:2,e:"金"},八:{s:2,e:"木"},九:{s:2,e:"木"},十:{s:2,e:"金"},
-百:{s:6,e:"水"},千:{s:3,e:"金"},萬:{s:12,e:"水"},億:{s:15,e:"土"},
-子:{s:3,e:"水"},丑:{s:4,e:"火"},寅:{s:11,e:"土"},卯:{s:5,e:"木"},辰:{s:7,e:"土"},
-巳:{s:3,e:"火"},午:{s:4,e:"火"},未:{s:5,e:"土"},申:{s:5,e:"金"},酉:{s:7,e:"金"},
-戌:{s:6,e:"土"},亥:{s:6,e:"水"},甲:{s:5,e:"木"},乙:{s:1,e:"木"},丙:{s:5,e:"火"},丁:{s:2,e:"火"},
-戊:{s:5,e:"土"},己:{s:3,e:"土"},庚:{s:8,e:"金"},辛:{s:7,e:"金"},壬:{s:4,e:"水"},癸:{s:9,e:"水"},
-乾:{s:11,e:"木"},坤:{s:8,e:"土"},震:{s:15,e:"水"},巽:{s:12,e:"火"},坎:{s:7,e:"土"},
-離:{s:19,e:"火"},艮:{s:6,e:"土"},兌:{s:7,e:"金"},中:{s:4,e:"火"},正:{s:5,e:"金"},
-大:{s:3,e:"火"},小:{s:3,e:"金"},多:{s:6,e:"火"},少:{s:4,e:"金"},好:{s:6,e:"水"},
-學:{s:16,e:"水"},文:{s:4,e:"水"},武:{s:8,e:"水"},書:{s:10,e:"金"},畫:{s:12,e:"土"},
-琴:{s:12,e:"木"},棋:{s:12,e:"木"},詩:{s:13,e:"金"},酒:{s:10,e:"水"},茶:{s:12,e:"木"},
-禪:{s:17,e:"金"},佛:{s:7,e:"水"},仙:{s:5,e:"金"},神:{s:10,e:"金"},靈:{s:24,e:"火"},
-符:{s:11,e:"木"},咒:{s:8,e:"金"},法:{s:8,e:"水"},劍:{s:15,e:"金"},
-鏡:{s:19,e:"金"},燈:{s:16,e:"火"},香:{s:9,e:"水"},爐:{s:20,e:"火"},鼎:{s:13,e:"火"},
-舟:{s:6,e:"金"},帆:{s:6,e:"水"},橋:{s:16,e:"木"},路:{s:13,e:"火"},門:{s:8,e:"水"},
-窗:{s:12,e:"金"},院:{s:10,e:"土"},樓:{s:15,e:"木"},閣:{s:14,e:"水"},
-塔:{s:13,e:"土"},寺:{s:6,e:"金"},廟:{s:15,e:"水"},觀:{s:25,e:"木"},
-河:{s:8,e:"水"},海:{s:10,e:"水"},湖:{s:12,e:"水"},江:{s:6,e:"水"},
-泉:{s:9,e:"水"},池:{s:6,e:"水"},浪:{s:10,e:"水"},潮:{s:15,e:"水"},冰:{s:6,e:"水"},
-石:{s:5,e:"金"},沙:{s:7,e:"水"},塵:{s:14,e:"火"},煙:{s:13,e:"火"},霞:{s:17,e:"水"},
-虹:{s:9,e:"木"},雷:{s:13,e:"水"},電:{s:13,e:"金"},霧:{s:19,e:"水"},
-林:{s:8,e:"木"},森:{s:12,e:"木"},草:{s:12,e:"木"},果:{s:8,e:"木"},
-枝:{s:8,e:"木"},葉:{s:15,e:"土"},根:{s:10,e:"木"},苗:{s:11,e:"水"},芽:{s:10,e:"木"},
-狗:{s:8,e:"木"},貓:{s:15,e:"水"},兔:{s:8,e:"金"},虎:{s:8,e:"水"},鼠:{s:13,e:"金"},
-牛:{s:4,e:"木"},羊:{s:6,e:"土"},豬:{s:15,e:"火"},雞:{s:21,e:"木"},蛇:{s:11,e:"金"},
-猴:{s:12,e:"木"},鹿:{s:11,e:"火"},象:{s:12,e:"金"},豹:{s:10,e:"水"},狼:{s:10,e:"火"},
-蝶:{s:15,e:"火"},蜂:{s:13,e:"水"},蟬:{s:18,e:"金"},雀:{s:11,e:"金"},燕:{s:16,e:"土"},
-鵲:{s:19,e:"金"},鴿:{s:17,e:"木"},鵝:{s:18,e:"木"},鴨:{s:16,e:"土"},鴛:{s:16,e:"火"},
-鴦:{s:16,e:"火"},鶯:{s:21,e:"木"},鷺:{s:24,e:"水"}
-};
-const RAD=[["氵","水"],["水","水"],["雨","水"],["冫","水"],["魚","水"],["火","火"],["灬","火"],["日","火"],["木","木"],["艹","木"],["竹","木"],["禾","木"],["土","土"],["山","土"],["石","金"],["金","金"],["钅","金"],["玉","木"],["亻","金"],["彳","火"],["心","金"],["忄","火"],["辶","火"],["宀","土"],["阝","土"],["女","土"],["子","水"],["馬","水"],["鳥","水"],["虫","金"],["犭","木"],["车","金"],["言","金"],["讠","金"],["貝","水"],["见","木"],["糸","火"],["纟","火"],["门","水"],["扌","木"],["攵","水"],["斤","木"],["戈","金"],["甲","木"],["申","金"],["目","木"],["田","土"],["罒","火"],["衤","金"],["米","水"],["舟","金"],["酉","金"],["足","木"],["身","金"],["鹿","火"],["麦","水"],["黄","土"],["鼎","火"],["鼓","木"],["鼠","金"]];
-function guessInfo(ch){
-  if(DIC[ch]) return DIC[ch];
-  for(const [r,e] of RAD){ if(ch.includes(r)) return {s:null,e}; }
-  const code=ch.charCodeAt(0)||0;
-  return {s:null,e:["金","木","水","火","土"][code%5]};
-}
-const LUCKY=[1,3,5,6,7,8,11,13,15,16,17,18,21,23,24,25,29,31,32,33,35,37,39,41,45,47,48,52,57,61,63,65,67,68,81];
-const HALF=[30,38,58,71,73,75];
-function shuli(n){ if(!n) return null; n=((n-1)%81)+1; if(LUCKY.includes(n)) return {lv:"吉",n}; if(HALF.includes(n)) return {lv:"半吉",n}; return {lv:"平",n}; }
-const SHENG={金:"水",水:"木",木:"火",火:"土",土:"金"};
-const KE={金:"木",木:"土",土:"水",水:"火",火:"金"};
-function relation(charE,dayE){
-  if(charE===dayE) return ["比和","字五行與今日氣運同氣連枝，行事得心應手，順遂之象。"];
-  if(SHENG[charE]===dayE) return ["生氣","所書之字洩秀於今日，才華外顯，付出有得，宜主動出擊。"];
-  if(SHENG[dayE]===charE) return ["相生","今日氣運生扶此字，貴人暗助，逢山有路，宜把握機緣。"];
-  if(KE[charE]===dayE) return ["我克","字剋日運，財為我所掌，利於求財落實，但須防勞碌傷身。"];
-  return ["克我","日運剋字，小有壓力，宜守不宜攻，以柔克剛，靜待轉機。"];
-}
-
-/* ============ 筆跡字相學（主模式：無需識字） ============ */
-/* 從筆跡提取：筆畫數、重心、濃淡、斜勢、格局 */
+/* ============ 笔迹特征提取（字相学） ============ */
 function extractFeatures(){
   const W=cv.getBoundingClientRect().width,H=340;
   let totalLen=0,sumX=0,sumY=0,wt=0;
@@ -244,194 +150,81 @@ function extractFeatures(){
     }
   }
   if(!wt) return null;
-  const count=strokes.length;
-  const ink=totalLen*(+document.getElementById("size").value||9);
-  const density=ink/(W*H);
   return {
-    count,
+    count:strokes.length,
     cx:sumX/wt/W, cy:sumY/wt/H,
-    density,
+    density:totalLen*size/(W*H),
     hRatio:hSeg/(hSeg+vSeg+sSeg||1),
     vRatio:vSeg/(hSeg+vSeg+sSeg||1),
     coverage:((maxX-minX)/W)*((maxY-minY)/H)
   };
 }
+
+/* ============ 签文模板 ============ */
 const HW={
-count:{ // 筆畫數
-  few:["落筆寥寥，是果決爽利之人。運勢貴在「快」——念頭一起即行動，莫讓猶豫偷走時機。","字簡而神聚，心無雜念。近期宜做減法，斷捨離之後，好運自有空隙鑽進來。"],
-  mid:["筆畫勻稱，進退有度。運勢平穩上升，一步一腳印，比急功近利者行得更遠。","不多不少，恰到好處。此為「中道」之相，守住分寸，就是守住運氣。"],
-  many:["筆筆不苟，心思細密。謀事周密是你的長處，但過慮則滯，七分謀定，三分隨緣。","字繁而有序，能駕馭複雜局面。近期瑣事雖多，條分縷析後皆是坦途。"]},
-hPos:{ // 重心左右
-  left:["筆跡重心偏左，是念舊之人。舊友舊物之中藏有助力，回頭看看，答案早在來處。","字傾於左，主「守」。宜鞏固既有基業，回頭收拾舊山河，勝過開疆拓土。"],
-  center:["重心居中正安穩，泰山崩於前而色不變。以不變應萬變，便是你近期的最好策略。"],
-  right:["筆勢向右開拓，志在遠方。新領域、新面孔之中有貴人，敢於邁出第一步便是贏。","重心右傾，主前瞻。眼光放遠，近期所作鋪墊，來月可見回響。"]},
-vPos:{ // 重心上下
-  top:["字起高處，志向凌雲。目標不妨定得大膽一些，近日有「好風憑藉力」之象。","筆意上揚，貴人提攜之兆。抬頭看路，低頭做事，兩不耽誤。"],
-  middle:"行止有度，不冒進不消沉，此為將帥之氣。穩住節奏，好運在半山腰等你。",
-  bottom:["字落實處，是務本之人。近期財運腳踏實地而來，一筆一筆，皆是正經進賬。","筆沉於下，宜接地氣。多走動、多實幹，好運藏在汗水裡。"]},
-weight:{ // 墨量濃淡
-  heavy:["落墨酣暢，氣魄過人。運勢如滿弓之箭，勢頭正猛，但弦滿易折，留三分力給明天。","筆墨飽滿，心力充足。近期可啃硬骨頭，難事到你手裡皆能軟化。"],
-  light:["筆清墨淡，是通透之人。運勢如溪水流石，不爭而勝，以柔克剛，靜中有大吉祥。","字跡清瘦，神清氣爽。近期宜讀書靜心，充電之後，自然電量滿格出發。"]},
-slant:{ // 斜勢
-  flat:["橫畫端穩，為人可靠。合作運極佳，別人願意把要緊事託付於你，這就是最硬的底牌。"],
-  tall:["豎畫挺拔，骨氣凜然。事業運上行，敢於堅持己見者，近期能贏得關鍵一役。"],
-  tilt:["筆走龍蛇，斜中取勁。靈感是你的財富，近期創意、點子變現的機會頗多。"]},
-spread:{ // 格局開張
-  wide:["字佔滿盤，格局開張。大場面壓不住你，近期宜爭取亮相的機會，台風就是你的風水。","揮灑自如，氣象宏大。膽子再放大一點，你想要的東西也在等你去取。"],
-  narrow:["字聚中央，收斂內斂。藏鋒守拙之時，暗地積累，厚積薄發，一鳴驚人未遠。"]}
+count:{
+  few:["落笔寥寥，是果决爽利之人。运势贵在「快」——念头一起即行动，莫让犹豫偷走时机。","字简而神聚，心无杂念。近期宜做减法，断舍离之后，好运自有空隙钻进来。"],
+  mid:["笔画匀称，进退有度。运势平稳上升，一步一脚印，比急功近利者行得更远。","不多不少，恰到好处。此为「中道」之相，守住分寸，就是守住运气。"],
+  many:["笔笔不苟，心思细密。谋事周密是你的长处，但过虑则滞，七分谋定，三分随缘。","字繁而有序，能驾驭复杂局面。近期琐事虽多，条分缕析后皆是坦途。"]},
+hPos:{
+  left:["笔迹重心偏左，是念旧之人。旧友旧物之中藏有助力，回头看看，答案早在来处。","字倾于左，主「守」。宜巩固既有基业，回头收拾旧山河，胜过开疆拓土。"],
+  center:["重心居中正安稳，泰山崩于前而色不变。以不变应万变，便是你近期的最好策略。"],
+  right:["笔势向右开拓，志在远方。新领域、新面孔之中有贵人，敢于迈出第一步便是赢。","重心右倾，主前瞻。眼光放远，近期所作铺垫，来月可见回响。"]},
+vPos:{
+  top:["字起高处，志向凌云。目标不妨定得大胆一些，近日有「好风凭借力」之象。","笔意上扬，贵人提携之兆。抬头看路，低头做事，两不耽误。"],
+  middle:"行止有度，不冒进不消沉，此为将帅之气。稳住节奏，好运在半山腰等你。",
+  bottom:["字落实处，是务本之人。近期财运脚踏实地而来，一笔一笔，皆是正经进账。","笔沉于下，宜接地气。多走动、多实干，好运藏在汗水里。"]},
+weight:{
+  heavy:["落墨酣畅，气魄过人。运势如满弓之箭，势头正猛，但弦满易折，留三分力给明天。","笔墨饱满，心力充足。近期可啃硬骨头，难事到你手里皆能软化。"],
+  light:["笔清墨淡，是通透之人。运势如溪水流石，不争而胜，以柔克刚，静中有大吉祥。","字迹清瘦，神清气爽。近期宜读书静心，充电之后，自然电量满格出发。"]},
+slant:{
+  flat:"横画端稳，为人可靠。合作运极佳，别人愿意把要紧事托付于你，这就是最硬的底牌。",
+  tall:"竖画挺拔，骨气凛然。事业运上行，敢于坚持己见者，近期能赢得关键一役。",
+  tilt:"笔走龙蛇，斜中取劲。灵感是你的财富，近期创意、点子变现的机会颇多。"},
+spread:{
+  wide:["字占满盘，格局开张。大场面压不住你，近期宜争取亮相的机会，台风就是你的风水。","挥洒自如，气象宏大。胆子再放大一点，你想要的东西也在等你去取。"],
+  narrow:["字聚中央，收敛内敛。藏锋守拙之时，暗地积累，厚积薄发，一鸣惊人未远。"]}
 };
-function hwElement(f){ // 由筆跡五行氣韻推一個「字五行」
+const YI=["会友","读书","早起","行善","整理","沐浴","拜访长辈","签约","出行","理财","写字","冥想","晒太阳","种花","吃素","早睡","听雨","整理钱包","给家人打电话","存钱","学习新技能","打扫","添新衣","祈福","慢走","喝茶"];
+const JI=["争执","熬夜","冲动消费","食生冷","背后议人","迟到","借钱","赌博","翻旧账","动怒","过劳","饮酒过量","独处过久","食言","攀比","高风险投资","贪凉","久坐","说大话","匆忙决定"];
+const COLOR={金:"白、金色",木:"青、绿色",水:"黑、蓝色",火:"红、紫色",土:"黄、褐色"};
+const DIR={金:"西方",木:"东方",水:"北方",火:"南方",土:"中原、本地"};
+
+/* 81 数理 */
+const LUCKY=[1,3,5,6,7,8,11,13,15,16,17,18,21,23,24,25,29,31,32,33,35,37,39,41,45,47,48,52,57,61,63,65,67,68,81];
+const HALF=[30,38,58,71,73,75];
+function shuli(n){n=((n-1)%81)+1;if(LUCKY.includes(n))return{lv:"吉",n};if(HALF.includes(n))return{lv:"半吉",n};return{lv:"平",n}}
+
+/* 五行生克 */
+const SHENG={金:"水",水:"木",木:"火",火:"土",土:"金"};
+const KE={金:"木",木:"土",土:"水",水:"火",火:"金"};
+function relation(charE,dayE){
+  if(charE===dayE) return ["比和","字与今日气运同气连枝，行事得心应手，顺遂之象。"];
+  if(SHENG[charE]===dayE) return ["生气","你所书之字泄秀于今日，才华外显，付出有得，宜主动出击。"];
+  if(SHENG[dayE]===charE) return ["相生","今日气运生扶此字，贵人暗助，逢山有路，宜把握机缘。"];
+  if(KE[charE]===dayE) return ["我克","字克日运，财为我所掌，利于求财落实，但须防劳碌伤身。"];
+  return ["克我","日运克字，小有压力，宜守不宜攻，以柔克刚，静待转机。"];
+}
+function hwElement(f){
   const score={金:0,木:0,水:0,火:0,土:0};
-  score[ f.hRatio>0.5 ? "土" : "木"]+=1;
-  score[ f.vRatio>0.35 ? "木" : "金"]+=1;
-  score[ f.density>0.055 ? "火" : "水"]+=1;
-  score[ f.cx>0.62 ? "金" : f.cx<0.38 ? "木" : "土"]+=1;
-  score[ f.cy<0.42 ? "火" : f.cy>0.62 ? "水" : "土"]+=1;
+  score[f.hRatio>0.5?"土":"木"]+=1;
+  score[f.vRatio>0.35?"木":"金"]+=1;
+  score[f.density>0.055?"火":"水"]+=1;
+  score[f.cx>0.62?"金":f.cx<0.38?"木":"土"]+=1;
+  score[f.cy<0.42?"火":f.cy>0.62?"水":"土"]+=1;
   return Object.keys(score).sort((a,b)=>score[b]-score[a])[0];
 }
 
-/* ============ 字義模板（選填模式） ============ */
-const TPL={
-金:{綜合:["金性堅剛，外冷內熱。近期運勢如寶劍出匣，鋒芒漸露，但切記過剛易折，留三分餘地與人。","此字帶金，主變動中藏機。眼前或有反覆，然金石之堅，終不負有心人。"],
-事業:["職場上宜亮劍不宣戰，以專業服人。秋後可見收成，切勿中途棄劍。","金主斷，當斷則斷。有拖延已久之事，本周內了結，反而海闊天空。"],
-財運:["財如礦藏，須深挖方得。正財穩健，偏財勿戀，見好即收。","有舊賬可回收，或有遺忘之財重見天日。宜整理錢財，去蕪存菁。"],
-感情:["情如金石，貴在堅貞。已有歸屬者宜多表達，單身者桃花藏於舊識之中。","言語易生鋒芒，對親近之人尤要柔聲。一語之讓，勝過千金。"],
-健康:["金應肺與皮毛，留意呼吸與乾燥，晨起潤喉，多食百合銀耳。","久坐傷氣，宜於申時（下午三點至五點）散步，舒展胸背。"]},
-木:{綜合:["木性生發，春氣在字。運勢如破土之苗，一日一新，但根未深時，忌搖忌拔。","此字帶木，主成長之運。凡事開端雖緩，後勁綿長，宜耐心灌溉。"],
-事業:["事業有新芽萌動，宜學習進修，廣結善緣。貴人在東方，留意長者提點。","木秀於林，風必摧之。近來小有是非，低調務實，風過即止。"],
-財運:["財如植樹，十年之計。宜長線布局，定投儲蓄，忌短線投機。","有合作生財之象，親兄弟明算賬，先小人後君子，財氣更穩。"],
-感情:["情如藤蔓，細水長流。單身者桃花緩至，急不得；有伴者宜共植一株綠意，以增情趣。","木主仁，多體諒對方難處，感情自會根深葉茂。"],
-健康:["木應肝膽，忌熬夜動怒。早睡早起，飲綠茶，食青蔬，可養肝氣。","宜踏青登山，接觸草木之氣，鬱結自散。"]},
-水:{綜合:["水性至柔，無孔不入。運勢如江河入海，繞過阻礙，終抵彼岸。變通是你今日的法寶。","此字帶水，主流動之運。近期或有遷移、調動、差旅之事，順水推舟，皆是好事。"],
-事業:["職場水主智，宜以謀略取勝，不宜硬碰。文書、溝通、創意類事務尤為順手。","水到渠成，舊謀將就。先前鋪墊之事，近日可見眉目。"],
-財運:["財如流水，源頭活則來。宜開源而非截流，新財路可試，但忌水多氾濫，量力而為。","有流動財之象，款項往來需核實，防紙上富貴。"],
-感情:["情如深水，靜水流深。單身者桃花於聚會、出行中遇；有伴者宜來一場近水之約。","多說軟話，水能載舟。爭執時先讓一步，感情自會回暖。"],
-健康:["水應腎與膀胱，忌生冷，宜溫補。睡前少飲水，護好腰腳。","情緒如潮，宜靜坐冥想，或臨帖習字，以水平心。"]},
-火:{綜合:["火性炎上，光明外顯。運勢如日中天，能見度高，宜乘勢而為，但過旺則燥，謹防口舌。","此字帶火，主聲名之運。近期容易被人看見，表現機會多，言行需更加謹慎。"],
-事業:["事業火主禮，宜登台亮相，主動爭取。名聲在外，機會自來。","火勢正旺，忌與人爭鋒對罵。少一句意氣，多一分從容，路更寬。"],
-財運:["財如火光，來得快去得也快。宜見好就收，落袋為安，忌追漲殺跌。","有因名得利之象，靠口碑與曝光可帶來進賬。"],
-感情:["感情熱烈，宜添一把火：一句讚美、一份小禮，勝過千言萬語。","火主燥，易起爭執。話到嘴邊留半句，家中事家中了。"],
-健康:["火應心與小腸，忌暴飲暴食，宜清淡。午後小憩，養心安神。","注意上火、口瘡、失眠，飲菊花茶，食苦味以清心。"]},
-土:{綜合:["土性厚德，載物生金。運勢如大地回春，穩中有升，宜固本培元，厚積薄發。","此字帶土，主根基之運。凡事宜穩紮穩打，地基打牢，高樓可期。"],
-事業:["事業土主信，宜守成、整理、盤點。把根基打實，來年自有騰達之日。","有置產、搬遷、裝修之象，宜實地考察，貨比三家。"],
-財運:["財如土地，不動為上。宜置業、儲蓄、長期持有，忌頻繁倒騰。","有固定資產增值之兆，或得長輩資助，穩字當頭。"],
-感情:["情如大地，包容為貴。單身者宜經人介紹，知根知底更可靠。","土主沉悶，宜添些新意，一頓家常飯也能吃出儀式感。"],
-健康:["土應脾胃，忌思慮過度與暴飲暴食。規律三餐，食黃色谷物以養脾。","久坐傷肉，宜每時辰起身活動，揉腹百次，脾土自健。"]}
-};
-const YI=["會友","讀書","早起","行善","整理","沐浴","拜訪長輩","簽約","出行","理財","寫字","冥想","曬太陽","種花","吃素","早睡","聽雨","整理錢包","給家人打電話","存錢","學習新技能","打掃","添新衣","祈福","慢走","喝茶"];
-const JI=["爭執","熬夜","衝動消費","食生冷","背後議人","遲到","借錢","賭博","翻舊賬","動怒","過勞","飲酒過量","獨處過久","食言","攀比","高風險投資","貪涼","久坐","說大話","匆忙決定"];
-const COLOR={金:"白、金色",木:"青、綠色",水:"黑、藍色",火:"紅、紫色",土:"黃、褐色"};
-const DIR={金:"西方",木:"東方",水:"北方",火:"南方",土:"中原、本地"};
-
+/* ============ 工具 ============ */
 function hashStr(s){let h=1779033703;for(let i=0;i<s.length;i++){h=Math.imul(h^s.charCodeAt(i),3432918353);h=h<<13|h>>>19}return h>>>0}
 function mulberry32(a){return function(){a|=0;a=a+0x6D2B79F5|0;let t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296}}
 function pick(rng,arr){return arr[Math.floor(rng()*arr.length)]}
 function shuffle(rng,arr){const a=arr.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(rng()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
 function todayStr(){const d=new Date();return d.getFullYear()+"-"+(d.getMonth()+1)+"-"+d.getDate()}
 function dayElement(){const d=new Date();const base=Math.floor(d.getTime()/86400000);return ["金","木","水","火","土"][base%5]}
+function levelOf(s){return s>=90?"上上签":s>=80?"上签":s>=70?"中上签":s>=60?"中签":"下签"}
 
-/* ============ 渲染 ============ */
-let lastResultText="";
-function render(r){
-  document.getElementById("rChar").innerHTML=r.charHTML;
-  document.getElementById("rMeta").innerHTML=r.meta;
-  document.getElementById("rScore").textContent=r.score;
-  document.getElementById("rLevel").textContent=r.level+" ・ "+r.relName;
-  const full=Math.max(1,Math.round(r.score/20));
-  document.getElementById("rStars").innerHTML="★".repeat(full)+'<span class="off">'+"★".repeat(5-full)+"</span>";
-  document.getElementById("rBar").style.width="0";
-  setTimeout(()=>{document.getElementById("rBar").style.width=r.score+"%"},120);
-  document.getElementById("rAspects").innerHTML=r.aspects;
-  document.getElementById("rYi").textContent=r.yi;
-  document.getElementById("rJi").textContent=r.ji;
-  document.getElementById("rLucky").innerHTML=r.lucky;
-  lastResultText=r.text;
-  const res=document.getElementById("result");
-  res.classList.remove("show"); void res.offsetWidth; res.classList.add("show");
-  res.scrollIntoView({behavior:"smooth",block:"start"});
-}
-function luckyHTML(rng,e){
-  return `<div><small>幸運色</small><span>${COLOR[e]}</span></div>
-   <div><small>吉利方位</small><span>${DIR[e]}</span></div>
-   <div><small>幸運數字</small><span>${1+Math.floor(rng()*9)}、${1+Math.floor(rng()*9)}</span></div>
-   <div><small>時辰建議</small><span>${pick(rng,["子時","卯時","巳時","午時","申時","酉時","亥時"])}</span></div>`;
-}
-function yiJi(rng){
-  return {yi:shuffle(rng,YI).slice(0,3).join("、"),ji:shuffle(rng,JI).slice(0,3).join("、")};
-}
-function levelOf(score){return score>=90?"上上籤":score>=80?"上籤":score>=70?"中上籤":score>=60?"中籤":"下籤"}
-function aspHTML(rng,score,pairs){
-  const tags=["大吉","順遂","平穩","留意","謹慎"];
-  return pairs.map(([t,txt],i)=>{
-    const lv=score-i*4-rng()*10;
-    const tag=lv>85?tags[0]:lv>75?tags[1]:lv>65?tags[2]:lv>55?tags[3]:tags[4];
-    return `<div class="asp"><h4>${t}<span class="lv">${tag}</span></h4><p>${txt}</p></div>`;
-  }).join("");
-}
-
-/* --- 模式一：筆跡測（默認，無需認字） --- */
-function analyzeHandwriting(f, snapshotURL){
-  const seed=hashStr(JSON.stringify([Math.round(f.cx*50),Math.round(f.cy*50),f.count,Math.round(f.density*1000),todayStr()]));
-  const rng=mulberry32(seed);
-  const sl=shuli(f.count);
-  let base=sl?(sl.lv==="吉"?82:sl.lv==="半吉"?70:60):68;
-  if(f.density>0.09) base-=4; if(f.coverage>0.45) base+=3; if(f.coverage<0.08) base-=3;
-  const score=Math.max(40,Math.min(99,Math.round(base+rng()*16-8)));
-  const level=levelOf(score);
-  const e=hwElement(f), dayE=dayElement();
-  const [relName]=relation(e,dayE);
-
-  const countTxt = f.count<=3?pick(rng,HW.count.few):f.count<=9?pick(rng,HW.count.mid):pick(rng,HW.count.many);
-  const hTxt = f.cx<0.42?pick(rng,HW.hPos.left):f.cx>0.58?pick(rng,HW.hPos.right):pick(rng,HW.hPos.center);
-  const vTxt = f.cy<0.40?(Array.isArray(HW.vPos.top)?pick(rng,HW.vPos.top):HW.vPos.top):f.cy>0.60?(Array.isArray(HW.vPos.bottom)?pick(rng,HW.vPos.bottom):HW.vPos.bottom):HW.vPos.middle;
-  const wTxt = f.density>0.05?pick(rng,HW.weight.heavy):pick(rng,HW.weight.light);
-  const sTxt = f.hRatio>0.55?HW.slant.flat:f.vRatio>0.35?HW.slant.tall:HW.slant.tilt;
-  const spTxt = f.coverage>0.28?pick(rng,HW.spread.wide):pick(rng,HW.spread.narrow);
-
-  const aspects=aspHTML(rng,score,[
-    ["綜合運勢",countTxt],["事業學業",hTxt],["財運",vTxt],["感情人緣",wTxt],["健康平安",spTxt+" "+sTxt]
-  ]);
-  const {yi,ji}=yiJi(rng);
-  const lucky=luckyHTML(rng,e);
-  const meta=`測字方式：<b>筆跡字相</b>（不問所書何字）<br>`+
-    `筆跡五行氣韻屬 <b style="color:var(--gold-bright)">${e}</b> ・ 今日氣運屬 <b style="color:var(--gold-bright)">${dayE}</b> ・ ${relName}`+
-    (sl?`<br>筆畫 <b>${f.count}</b> 畫，應数理第 <b>${sl.n}</b> 數（<b>${sl.lv}</b>）`:`<br>筆畫 <b>${f.count}</b> 畫`);
-
-  render({
-    charHTML:`<img src="${snapshotURL}" alt="筆跡">`,
-    meta, score, level, relName, aspects, yi, ji, lucky,
-    text:`【測字閣・筆跡測・${todayStr()}】\n今日親筆一字，${level}，運勢 ${score} 分。\n筆跡五行屬${e}，與今日${dayE}運成「${relName}」之局。\n宜：${yi}；忌：${ji}。\n幸運色：${COLOR[e]}；吉方：${DIR[e]}。\n（娛樂為主，切勿迷信）`
-  });
-}
-
-/* --- 模式二：字義測（選填補充） --- */
-function analyzeChar(ch, snapshotURL){
-  const info=guessInfo(ch);
-  const dayE=dayElement();
-  const [relName,relText]=relation(info.e,dayE);
-  const rng=mulberry32(hashStr(ch+"|"+todayStr()));
-  const sl=shuli(info.s);
-  let base=sl?(sl.lv==="吉"?82:sl.lv==="半吉"?70:58):68;
-  const score=Math.max(40,Math.min(99,Math.round(base+rng()*16-8)));
-  const level=levelOf(score);
-  const aspects=aspHTML(rng,score,[
-    ["綜合運勢",TPL[info.e].綜合],["事業學業",TPL[info.e].事業],["財運",TPL[info.e].財運],["感情人緣",TPL[info.e].感情],["健康平安",TPL[info.e].健康]
-  ].map(([t,arr])=>[t,pick(rng,arr)]));
-  const {yi,ji}=yiJi(rng);
-  const lucky=luckyHTML(rng,info.e);
-  const meta=`所測之字：<b style="color:var(--gold-bright);font-size:20px">${ch}</b><br>`+
-    `此字五行屬 <b style="color:var(--gold-bright)">${info.e}</b> ・ 今日氣運屬 <b style="color:var(--gold-bright)">${dayE}</b><br>`+
-    (info.s?`筆畫 <b>${info.s}</b> 畫，数理第 <b>${sl.n}</b> 數（<b>${sl.lv}</b>） ・ `:"")+`字運關係：<b style="color:var(--gold-bright)">${relName}</b>`;
-  void snapshotURL; // 字義模式只顯示字本身，不沿用舊筆跡截圖
-  render({
-    charHTML:`<span style="font-size:76px">${ch}</span>`,
-    meta, score, level, relName, aspects, yi, ji, lucky,
-    text:`【測字閣・${todayStr()}】\n我測的是「${ch}」字，${level}，運勢 ${score} 分。\n五行：字屬${info.e}，今日屬${dayE}，${relName}。`+(info.s?`筆畫${info.s}，数理${sl.n}（${sl.lv}）。`:"")+
-      `\n宜：${yi}；忌：${ji}。\n幸運色：${COLOR[info.e]}；吉方：${DIR[info.e]}。\n（娛樂為主，切勿迷信）`
-  });
-}
-
-/* ============ 畫板 ============ */
+/* ============ 画板 ============ */
 const cv=document.getElementById("board"),ctx=cv.getContext("2d");
 const hint=document.getElementById("hint");
 let strokes=[],cur=null,color="#e8dcc3",size=9,drawing=false;
@@ -483,16 +276,9 @@ document.querySelectorAll(".swatch").forEach(s=>s.onclick=()=>{
 });
 window.addEventListener("resize",resize);
 
-/* ============ 流程 ============ */
-const chipsEl=document.getElementById("chips");
-Object.keys(DIC).slice(0,16).forEach(c=>{
-  const sp=document.createElement("span");sp.textContent=c;
-  sp.onclick=()=>{document.getElementById("charInput").value=c;strokes=[];redraw()};
-  chipsEl.appendChild(sp);
-});
+/* ============ 解签 ============ */
+let lastResultText="";
 function snapshot(){
-  // 把筆跡繪到透明底小圖上，作為結果頁的「字」
-  const r=cv.getBoundingClientRect();
   let minX=1e9,minY=1e9,maxX=-1e9,maxY=-1e9;
   for(const st of strokes)for(const p of st.pts){minX=Math.min(minX,p.x);minY=Math.min(minY,p.y);maxX=Math.max(maxX,p.x);maxY=Math.max(maxY,p.y)}
   const pad=14,bw=Math.max(maxX-minX+pad*2,10),bh=Math.max(maxY-minY+pad*2,10);
@@ -519,20 +305,64 @@ function snapshot(){
   return off.toDataURL();
 }
 function go(){
-  const ch=document.getElementById("charInput").value.trim();
-  if(!strokes.length){
-    if(ch){analyzeChar(ch,null);return}
-    alert("請先在畫板上揮毫書寫，再點「測字」");return;
-  }
-  if(ch){ strokes=[]; redraw(); analyzeChar(ch,null); return; }
+  if(!strokes.length){alert("请先在画板上挥毫写字，再点「测字」");return}
   const f=extractFeatures();
-  const snap=snapshot();
-  analyzeHandwriting(f,snap);
+  const seed=hashStr([Math.round(f.cx*50),Math.round(f.cy*50),f.count,Math.round(f.density*1000),todayStr()].join("|"));
+  const rng=mulberry32(seed);
+  const sl=shuli(f.count);
+  let base=sl.lv==="吉"?82:sl.lv==="半吉"?70:60;
+  if(f.density>0.09)base-=4; if(f.coverage>0.45)base+=3; if(f.coverage<0.08)base-=3;
+  const score=Math.max(40,Math.min(99,Math.round(base+rng()*16-8)));
+  const level=levelOf(score);
+  const e=hwElement(f),dayE=dayElement();
+  const [relName]=relation(e,dayE);
+
+  const countTxt=f.count<=3?pick(rng,HW.count.few):f.count<=9?pick(rng,HW.count.mid):pick(rng,HW.count.many);
+  const hTxt=f.cx<0.42?pick(rng,HW.hPos.left):f.cx>0.58?pick(rng,HW.hPos.right):pick(rng,HW.hPos.center);
+  const vTxt=Array.isArray(HW.vPos.top)?(f.cy<0.40?pick(rng,HW.vPos.top):f.cy>0.60?pick(rng,HW.vPos.bottom):HW.vPos.middle):HW.vPos.middle;
+  const wTxt=f.density>0.05?pick(rng,HW.weight.heavy):pick(rng,HW.weight.light);
+  const sTxt=f.hRatio>0.55?HW.slant.flat:f.vRatio>0.35?HW.slant.tall:HW.slant.tilt;
+  const spTxt=f.coverage>0.28?pick(rng,HW.spread.wide):pick(rng,HW.spread.narrow);
+
+  const tags=["大吉","顺遂","平稳","留意","谨慎"];
+  const aspPairs=[["综合运势",countTxt],["事业学业",hTxt],["财运",vTxt],["感情人缘",wTxt],["健康平安",spTxt+" "+sTxt]];
+  const aspects=aspPairs.map(([t,txt],i)=>{
+    const lv=score-i*4-rng()*10;
+    const tag=lv>85?tags[0]:lv>75?tags[1]:lv>65?tags[2]:lv>55?tags[3]:tags[4];
+    return `<div class="asp"><h4>${t}<span class="lv">${tag}</span></h4><p>${txt}</p></div>`;
+  }).join("");
+  const yi=shuffle(rng,YI).slice(0,3).join("、");
+  const ji=shuffle(rng,JI).slice(0,3).join("、");
+
+  document.getElementById("rChar").innerHTML=`<img src="${snapshot()}" alt="笔迹">`;
+  document.getElementById("rMeta").innerHTML=
+    `测字方式：<b>笔迹字相</b>（不问所书何字）<br>`+
+    `笔迹五行气韵属 <b>${e}</b> ・ 今日气运属 <b>${dayE}</b> ・ ${relName}`+
+    `<br>笔画 <b>${f.count}</b> 画，应数理第 <b>${sl.n}</b> 数（<b>${sl.lv}</b>）`;
+  document.getElementById("rScore").textContent=score;
+  document.getElementById("rLevel").textContent=level+" ・ "+relName;
+  const full=Math.max(1,Math.round(score/20));
+  document.getElementById("rStars").innerHTML="★".repeat(full)+'<span class="off">'+"★".repeat(5-full)+"</span>";
+  document.getElementById("rBar").style.width="0";
+  setTimeout(()=>{document.getElementById("rBar").style.width=score+"%"},120);
+  document.getElementById("rAspects").innerHTML=aspects;
+  document.getElementById("rYi").textContent=yi;
+  document.getElementById("rJi").textContent=ji;
+  document.getElementById("rLucky").innerHTML=
+    `<div><small>幸运色</small><span>${COLOR[e]}</span></div>
+     <div><small>吉利方位</small><span>${DIR[e]}</span></div>
+     <div><small>幸运数字</small><span>${1+Math.floor(rng()*9)}、${1+Math.floor(rng()*9)}</span></div>
+     <div><small>时辰建议</small><span>${pick(rng,["子时","卯时","巳时","午时","申时","酉时","亥时"])}</span></div>`;
+
+  lastResultText=`【测字阁・笔迹测・${todayStr()}】\n今日亲笔一字，${level}，运势 ${score} 分。\n笔迹五行属${e}，与今日${dayE}运成「${relName}」之局。\n宜：${yi}；忌：${ji}。\n幸运色：${COLOR[e]}；吉方：${DIR[e]}。\n（娱乐为主，切勿迷信）`;
+
+  const res=document.getElementById("result");
+  res.classList.remove("show"); void res.offsetWidth; res.classList.add("show");
+  res.scrollIntoView({behavior:"smooth",block:"start"});
 }
 document.getElementById("go").onclick=go;
-document.getElementById("charInput").addEventListener("keydown",e=>{if(e.key==="Enter")go()});
 document.getElementById("copy").onclick=function(){
-  navigator.clipboard.writeText(lastResultText).then(()=>{this.textContent="已複製 ✓";setTimeout(()=>this.textContent="複製籤文",1500)});
+  navigator.clipboard.writeText(lastResultText).then(()=>{this.textContent="已复制 ✓";setTimeout(()=>this.textContent="复制签文",1500)});
 };
 resize();
 </script>
