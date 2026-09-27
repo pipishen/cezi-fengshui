@@ -337,8 +337,8 @@ function render(r){
   document.getElementById("rMeta").innerHTML=r.meta;
   document.getElementById("rScore").textContent=r.score;
   document.getElementById("rLevel").textContent=r.level+" ・ "+r.relName;
-  const stars=Math.round(r.score/20*2)/2,full=Math.floor(stars),half=stars-full>0;
-  document.getElementById("rStars").innerHTML="★".repeat(full)+(half?"⯨":"")+'<span class="off">'+"★".repeat(5-Math.ceil(stars))+"</span>";
+  const full=Math.max(1,Math.round(r.score/20));
+  document.getElementById("rStars").innerHTML="★".repeat(full)+'<span class="off">'+"★".repeat(5-full)+"</span>";
   document.getElementById("rBar").style.width="0";
   setTimeout(()=>{document.getElementById("rBar").style.width=r.score+"%"},120);
   document.getElementById("rAspects").innerHTML=r.aspects;
@@ -422,8 +422,9 @@ function analyzeChar(ch, snapshotURL){
   const meta=`所測之字：<b style="color:var(--gold-bright);font-size:20px">${ch}</b><br>`+
     `此字五行屬 <b style="color:var(--gold-bright)">${info.e}</b> ・ 今日氣運屬 <b style="color:var(--gold-bright)">${dayE}</b><br>`+
     (info.s?`筆畫 <b>${info.s}</b> 畫，数理第 <b>${sl.n}</b> 數（<b>${sl.lv}</b>） ・ `:"")+`字運關係：<b style="color:var(--gold-bright)">${relName}</b>`;
+  void snapshotURL; // 字義模式只顯示字本身，不沿用舊筆跡截圖
   render({
-    charHTML:snapshotURL?`<img src="${snapshotURL}" alt="筆跡">`:ch,
+    charHTML:`<span style="font-size:76px">${ch}</span>`,
     meta, score, level, relName, aspects, yi, ji, lucky,
     text:`【測字閣・${todayStr()}】\n我測的是「${ch}」字，${level}，運勢 ${score} 分。\n五行：字屬${info.e}，今日屬${dayE}，${relName}。`+(info.s?`筆畫${info.s}，数理${sl.n}（${sl.lv}）。`:"")+
       `\n宜：${yi}；忌：${ji}。\n幸運色：${COLOR[info.e]}；吉方：${DIR[info.e]}。\n（娛樂為主，切勿迷信）`
@@ -486,7 +487,7 @@ window.addEventListener("resize",resize);
 const chipsEl=document.getElementById("chips");
 Object.keys(DIC).slice(0,16).forEach(c=>{
   const sp=document.createElement("span");sp.textContent=c;
-  sp.onclick=()=>{document.getElementById("charInput").value=c};
+  sp.onclick=()=>{document.getElementById("charInput").value=c;strokes=[];redraw()};
   chipsEl.appendChild(sp);
 });
 function snapshot(){
@@ -523,10 +524,10 @@ function go(){
     if(ch){analyzeChar(ch,null);return}
     alert("請先在畫板上揮毫書寫，再點「測字」");return;
   }
+  if(ch){ strokes=[]; redraw(); analyzeChar(ch,null); return; }
   const f=extractFeatures();
   const snap=snapshot();
-  if(ch) analyzeChar(ch,snap);
-  else analyzeHandwriting(f,snap);
+  analyzeHandwriting(f,snap);
 }
 document.getElementById("go").onclick=go;
 document.getElementById("charInput").addEventListener("keydown",e=>{if(e.key==="Enter")go()});
